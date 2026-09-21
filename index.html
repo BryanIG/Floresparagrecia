@@ -21,11 +21,18 @@
     }
 
     body {
+      background-color: var(--dark-color);
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .hero-section {
+      width: 100%;
+      height: 100vh;
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      min-height: 100vh;
-      background-color: var(--dark-color);
       overflow: hidden;
       perspective: 1000px;
     }
@@ -1082,8 +1089,8 @@
 
     .love-letter-container {
       position: fixed;
-      right: 5%;
-      top: 50%;
+      right: 25%;
+      top: 75%;
       transform: translateY(-50%);
       z-index: 100;
       cursor: pointer;
@@ -1091,8 +1098,8 @@
     }
 
     .envelope {
-      width: 200px;
-      height: 140px;
+      width: 360px;
+      height: 220px;
       background: #e0d0c0;
       position: relative;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
@@ -1106,9 +1113,9 @@
       left: 0;
       width: 0;
       height: 0;
-      border-left: 100px solid transparent;
-      border-right: 100px solid transparent;
-      border-top: 80px solid #d4c0b0;
+      border-left: 180px solid transparent;
+      border-right: 180px solid transparent;
+      border-top: 130px solid #d4c0b0;
       transform-origin: top;
       transition: transform 0.5s, z-index 0.5s;
       z-index: 3;
@@ -1121,33 +1128,36 @@
       left: 0;
       width: 0;
       height: 0;
-      border-left: 100px solid #ecdac8;
-      border-right: 100px solid #ecdac8;
-      border-bottom: 70px solid #f6eedf;
-      border-top: 70px solid transparent;
+      border-left: 180px solid #ecdac8;
+      border-right: 180px solid #ecdac8;
+      border-bottom: 110px solid #f6eedf;
+      border-top: 110px solid transparent;
       z-index: 2;
     }
 
     .letter {
       position: absolute;
       bottom: 0;
-      left: 10px;
-      width: 180px;
-      height: 120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 320px;
+      height: 200px;
       background: #fff;
-      padding: 10px;
+      padding: 30px;
       box-sizing: border-box;
-      transition: transform 0.5s, height 0.5s;
+      transition: width 0.6s, height 0.6s, transform 0.6s, padding 0.6s;
       z-index: 1;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
+      text-align: justify;
       font-family: 'Arial', sans-serif;
-      font-size: 0.9rem;
+      font-size: 1.1rem;
       color: #333;
       visibility: hidden;
+      border: 4px solid #f6eedf;
+      border-radius: 4px;
     }
 
     .open .envelope::before {
@@ -1157,10 +1167,37 @@
 
     .open .letter {
       visibility: visible;
-      transform: translateY(-120px);
-      height: 200px;
+      transform: translate(-50%, -240px);
+      width: 500px;
+      height: 380px;
+      padding: 35px 45px;
       z-index: 2;
-      box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .heart-seal {
+      position: absolute;
+      left: 50%;
+      top: 130px;
+      transform: translate(-50%, -50%);
+      display: flex;
+      z-index: 4;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
+    }
+
+    .heart-left,
+    .heart-right {
+      transition: transform 0.6s ease, opacity 0.6s ease;
+    }
+
+    .open .heart-left {
+      transform: translateX(-40px) rotate(-20deg) scale(0.6);
+      opacity: 0;
+    }
+
+    .open .heart-right {
+      transform: translateX(40px) rotate(20deg) scale(0.6);
+      opacity: 0;
     }
 
     @keyframes fall {
@@ -1184,336 +1221,554 @@
       pointer-events: none;
       filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
     }
+
+    /* Video Galleries */
+    .video-gallery {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      background-color: var(--dark-color);
+      padding-bottom: 100px;
+    }
+
+    .principal-container {
+      width: 100%;
+      padding: 60px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 70vh;
+    }
+
+    .principal-container video {
+      max-width: 90%;
+      max-height: 70vh;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      object-fit: contain;
+    }
+
+    .split-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding: 40px 10%;
+      gap: 120px;
+    }
+
+    .split-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 50px;
+      width: 100%;
+    }
+
+    .split-row.reverse {
+      flex-direction: row-reverse;
+    }
+
+    .video-box,
+    .text-box {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .video-box video {
+      width: 100%;
+      max-height: 500px;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.05);
+      object-fit: cover;
+    }
+
+    .text-box {
+      color: #fff;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .text-box h2 {
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+      color: #ffd700;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+      white-space: pre-wrap;
+    }
+
+    @media (max-width: 768px) {
+
+      .split-row,
+      .split-row.reverse {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .split-container {
+        padding: 40px 5%;
+      }
+
+      .text-box {
+        padding: 10px;
+      }
+    }
   </style>
 </head>
 
 <body class="not-loaded">
-  <div class="night"></div>
+  <div class="hero-section">
+    <div class="night"></div>
 
-  <div class="left-text">Para mi chaparrita grecita</div>
+    <div class="left-text">Para mi chaparrita grecita</div>
 
-  <div class="love-letter-container" onclick="this.classList.toggle('open')">
-    <div class="envelope">
-      <div class="letter">
-        (Mensaje que escribiré después)
-      </div>
-    </div>
-  </div>
+    <div class="love-letter-container" onclick="this.classList.toggle('open')">
+      <div class="envelope">
+        <div class="heart-seal">
+          <div class="heart-left">
+            <svg viewBox="0 0 16 29.6" preserveAspectRatio="xMinYMin slice" width="40" height="74">
+              <path fill="#e74c3c" d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+              c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z" />
+            </svg>
+          </div>
+          <div class="heart-right">
+            <svg viewBox="16 0 16 29.6" preserveAspectRatio="xMaxYMin slice" width="40" height="74">
+              <path fill="#e74c3c" d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+              c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z" />
+            </svg>
+          </div>
+        </div>
+        <div class="letter">
+          21/09/2026
 
-  <div class="shooting-stars">
-    <div class="shooting-star"></div>
-    <div class="shooting-star"></div>
-    <div class="shooting-star"></div>
-    <div class="shooting-star"></div>
-    <div class="shooting-star"></div>
-    <div class="shooting-star"></div>
-    <div class="shooting-star"></div>
-    <div class="shooting-star"></div>
-  </div>
+          Querida maeta grecita, prepare esta sorpresa para ti mi vida,
+          quiero decirte que talvez no se muchas cosas en esta vida, talvez
+          no tengo habilidades que quisiera tener para resolverte el mundo entero mi amor
+          pero mi carrera me enseño que cualquier cosa que me imagine la puedo programar
+          no me limito a darte flores solo en el mundo real , tambien lo hare en este mundo virtual
+          ,te adoro con todo mi corazon y te mereces esto y mas mi vida, le doy gracias a
+          Dios por tu vida.
 
-  <div class="flowers">
-    <div class="flower flower--1">
-      <div class="flower__leafs flower__leafs--1">
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(0deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(30deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(60deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(90deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(120deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(150deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(180deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(210deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(240deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(270deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(300deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(330deg);"></div>
-        <div class="flower__white-circle"></div>
+          -con amor, Bryan.
 
-        <div class="flower__light flower__light--1"></div>
-        <div class="flower__light flower__light--2"></div>
-        <div class="flower__light flower__light--3"></div>
-        <div class="flower__light flower__light--4"></div>
-        <div class="flower__light flower__light--5"></div>
-        <div class="flower__light flower__light--6"></div>
-        <div class="flower__light flower__light--7"></div>
-        <div class="flower__light flower__light--8"></div>
-      </div>
-      <div class="flower__line">
-        <div class="flower__line__leaf flower__line__leaf--1"></div>
-        <div class="flower__line__leaf flower__line__leaf--2"></div>
-        <div class="flower__line__leaf flower__line__leaf--3"></div>
-        <div class="flower__line__leaf flower__line__leaf--4"></div>
+        </div>
       </div>
     </div>
 
-    <div class="flower flower--2">
-      <div class="flower__leafs flower__leafs--2">
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(0deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(30deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(60deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(90deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(120deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(150deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(180deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(210deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(240deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(270deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(300deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(330deg);"></div>
-        <div class="flower__white-circle"></div>
-
-        <div class="flower__light flower__light--1"></div>
-        <div class="flower__light flower__light--2"></div>
-        <div class="flower__light flower__light--3"></div>
-        <div class="flower__light flower__light--4"></div>
-        <div class="flower__light flower__light--5"></div>
-        <div class="flower__light flower__light--6"></div>
-        <div class="flower__light flower__light--7"></div>
-        <div class="flower__light flower__light--8"></div>
-      </div>
-      <div class="flower__line">
-        <div class="flower__line__leaf flower__line__leaf--1"></div>
-        <div class="flower__line__leaf flower__line__leaf--2"></div>
-        <div class="flower__line__leaf flower__line__leaf--3"></div>
-        <div class="flower__line__leaf flower__line__leaf--4"></div>
-      </div>
+    <div class="shooting-stars">
+      <div class="shooting-star"></div>
+      <div class="shooting-star"></div>
+      <div class="shooting-star"></div>
+      <div class="shooting-star"></div>
+      <div class="shooting-star"></div>
+      <div class="shooting-star"></div>
+      <div class="shooting-star"></div>
+      <div class="shooting-star"></div>
     </div>
 
-    <div class="flower flower--3">
-      <div class="flower__leafs flower__leafs--3">
-        <!-- Pétalos exteriores -->
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(0deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(30deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(60deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(90deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(120deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(150deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(180deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(210deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(240deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(270deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(300deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(330deg);"></div>
-        <div class="flower__white-circle"></div>
+    <div class="flowers">
+      <div class="flower flower--1">
+        <div class="flower__leafs flower__leafs--1">
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(0deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(30deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(60deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(90deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(120deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(150deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(180deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(210deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(240deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(270deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(300deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(330deg);"></div>
+          <div class="flower__white-circle"></div>
 
-        <div class="flower__light flower__light--1"></div>
-        <div class="flower__light flower__light--2"></div>
-        <div class="flower__light flower__light--3"></div>
-        <div class="flower__light flower__light--4"></div>
-        <div class="flower__light flower__light--5"></div>
-        <div class="flower__light flower__light--6"></div>
-        <div class="flower__light flower__light--7"></div>
-        <div class="flower__light flower__light--8"></div>
+          <div class="flower__light flower__light--1"></div>
+          <div class="flower__light flower__light--2"></div>
+          <div class="flower__light flower__light--3"></div>
+          <div class="flower__light flower__light--4"></div>
+          <div class="flower__light flower__light--5"></div>
+          <div class="flower__light flower__light--6"></div>
+          <div class="flower__light flower__light--7"></div>
+          <div class="flower__light flower__light--8"></div>
+        </div>
+        <div class="flower__line">
+          <div class="flower__line__leaf flower__line__leaf--1"></div>
+          <div class="flower__line__leaf flower__line__leaf--2"></div>
+          <div class="flower__line__leaf flower__line__leaf--3"></div>
+          <div class="flower__line__leaf flower__line__leaf--4"></div>
+        </div>
       </div>
-      <div class="flower__line">
-        <div class="flower__line__leaf flower__line__leaf--1"></div>
-        <div class="flower__line__leaf flower__line__leaf--2"></div>
-        <div class="flower__line__leaf flower__line__leaf--3"></div>
-        <div class="flower__line__leaf flower__line__leaf--4"></div>
+
+      <div class="flower flower--2">
+        <div class="flower__leafs flower__leafs--2">
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(0deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(30deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(60deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(90deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(120deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(150deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(180deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(210deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(240deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(270deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(300deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(330deg);"></div>
+          <div class="flower__white-circle"></div>
+
+          <div class="flower__light flower__light--1"></div>
+          <div class="flower__light flower__light--2"></div>
+          <div class="flower__light flower__light--3"></div>
+          <div class="flower__light flower__light--4"></div>
+          <div class="flower__light flower__light--5"></div>
+          <div class="flower__light flower__light--6"></div>
+          <div class="flower__light flower__light--7"></div>
+          <div class="flower__light flower__light--8"></div>
+        </div>
+        <div class="flower__line">
+          <div class="flower__line__leaf flower__line__leaf--1"></div>
+          <div class="flower__line__leaf flower__line__leaf--2"></div>
+          <div class="flower__line__leaf flower__line__leaf--3"></div>
+          <div class="flower__line__leaf flower__line__leaf--4"></div>
+        </div>
       </div>
+
+      <div class="flower flower--3">
+        <div class="flower__leafs flower__leafs--3">
+          <!-- Pétalos exteriores -->
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(0deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(30deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(60deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(90deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(120deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(150deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(180deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(210deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(240deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(270deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(300deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(330deg);"></div>
+          <div class="flower__white-circle"></div>
+
+          <div class="flower__light flower__light--1"></div>
+          <div class="flower__light flower__light--2"></div>
+          <div class="flower__light flower__light--3"></div>
+          <div class="flower__light flower__light--4"></div>
+          <div class="flower__light flower__light--5"></div>
+          <div class="flower__light flower__light--6"></div>
+          <div class="flower__light flower__light--7"></div>
+          <div class="flower__light flower__light--8"></div>
+        </div>
+        <div class="flower__line">
+          <div class="flower__line__leaf flower__line__leaf--1"></div>
+          <div class="flower__line__leaf flower__line__leaf--2"></div>
+          <div class="flower__line__leaf flower__line__leaf--3"></div>
+          <div class="flower__line__leaf flower__line__leaf--4"></div>
+        </div>
+      </div>
+
+      <div class="flower flower--4">
+        <div class="flower__leafs flower__leafs--4">
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(0deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(30deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(60deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(90deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(120deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(150deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(180deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(210deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(240deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(270deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(300deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(330deg);"></div>
+          <div class="flower__white-circle"></div>
+
+          <div class="flower__light flower__light--1"></div>
+          <div class="flower__light flower__light--2"></div>
+          <div class="flower__light flower__light--3"></div>
+          <div class="flower__light flower__light--4"></div>
+          <div class="flower__light flower__light--5"></div>
+          <div class="flower__light flower__light--6"></div>
+          <div class="flower__light flower__light--7"></div>
+          <div class="flower__light flower__light--8"></div>
+        </div>
+        <div class="flower__line">
+          <div class="flower__line__leaf flower__line__leaf--1"></div>
+          <div class="flower__line__leaf flower__line__leaf--2"></div>
+          <div class="flower__line__leaf flower__line__leaf--3"></div>
+          <div class="flower__line__leaf flower__line__leaf--4"></div>
+        </div>
+      </div>
+
+      <div class="flower flower--5">
+        <div class="flower__leafs flower__leafs--5">
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(0deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(30deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(60deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(90deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(120deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(150deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(180deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(210deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(240deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(270deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(300deg);"></div>
+          <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(330deg);"></div>
+          <div class="flower__white-circle"></div>
+
+          <div class="flower__light flower__light--1"></div>
+          <div class="flower__light flower__light--2"></div>
+          <div class="flower__light flower__light--3"></div>
+          <div class="flower__light flower__light--4"></div>
+          <div class="flower__light flower__light--5"></div>
+          <div class="flower__light flower__light--6"></div>
+          <div class="flower__light flower__light--7"></div>
+          <div class="flower__light flower__light--8"></div>
+        </div>
+        <div class="flower__line">
+          <div class="flower__line__leaf flower__line__leaf--1"></div>
+          <div class="flower__line__leaf flower__line__leaf--2"></div>
+          <div class="flower__line__leaf flower__line__leaf--3"></div>
+          <div class="flower__line__leaf flower__line__leaf--4"></div>
+        </div>
+      </div>
+
+      <div class="grow-ans" style="--d:1.2s">
+        <div class="flower__g-long">
+          <div class="flower__g-long__top"></div>
+          <div class="flower__g-long__bottom"></div>
+        </div>
+      </div>
+
+      <div class="growing-grass">
+        <div class="flower__grass flower__grass--1">
+          <div class="flower__grass--top"></div>
+          <div class="flower__grass--bottom"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--1"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--2"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--3"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--4"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--5"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--6"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--7"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--8"></div>
+          <div class="flower__grass__overlay"></div>
+        </div>
+      </div>
+
+      <div class="growing-grass">
+        <div class="flower__grass flower__grass--2">
+          <div class="flower__grass--top"></div>
+          <div class="flower__grass--bottom"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--1"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--2"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--3"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--4"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--5"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--6"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--7"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--8"></div>
+          <div class="flower__grass__overlay"></div>
+        </div>
+      </div>
+
+      <div class="growing-grass">
+        <div class="flower__grass flower__grass--3">
+          <div class="flower__grass--top"></div>
+          <div class="flower__grass--bottom"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--1"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--2"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--3"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--4"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--5"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--6"></div>
+          <div class="flower__grass__overlay"></div>
+        </div>
+      </div>
+
+      <div class="growing-grass">
+        <div class="flower__grass flower__grass--4">
+          <div class="flower__grass--top"></div>
+          <div class="flower__grass--bottom"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--1"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--2"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--3"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--4"></div>
+          <div class="flower__grass__overlay"></div>
+        </div>
+      </div>
+
+      <div class="growing-grass">
+        <div class="flower__grass flower__grass--5">
+          <div class="flower__grass--top"></div>
+          <div class="flower__grass--bottom"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--1"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--2"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--3"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--4"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--5"></div>
+          <div class="flower__grass__overlay"></div>
+        </div>
+      </div>
+
+      <div class="growing-grass">
+        <div class="flower__grass flower__grass--6">
+          <div class="flower__grass--top"></div>
+          <div class="flower__grass--bottom"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--1"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--2"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--3"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--4"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--5"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--6"></div>
+          <div class="flower__grass__overlay"></div>
+        </div>
+      </div>
+
+      <div class="growing-grass">
+        <div class="flower__grass flower__grass--7">
+          <div class="flower__grass--top"></div>
+          <div class="flower__grass--bottom"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--1"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--2"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--3"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--4"></div>
+          <div class="flower__grass__overlay"></div>
+        </div>
+      </div>
+
+      <div class="growing-grass">
+        <div class="flower__grass flower__grass--8">
+          <div class="flower__grass--top"></div>
+          <div class="flower__grass--bottom"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--1"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--2"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--3"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--4"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--5"></div>
+          <div class="flower__grass__overlay"></div>
+        </div>
+      </div>
+
+      <div class="growing-grass">
+        <div class="flower__grass flower__grass--9">
+          <div class="flower__grass--top"></div>
+          <div class="flower__grass--bottom"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--1"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--2"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--3"></div>
+          <div class="flower__grass__overlay"></div>
+        </div>
+      </div>
+
+      <div class="growing-grass">
+        <div class="flower__grass flower__grass--10">
+          <div class="flower__grass--top"></div>
+          <div class="flower__grass--bottom"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--1"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--2"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--3"></div>
+          <div class="flower__grass__overlay"></div>
+        </div>
+      </div>
+    </div> <!-- end of .flowers -->
+  </div> <!-- end of .hero-section -->
+
+  <div class="video-gallery">
+    <!-- Contenedor Principal (Video centrado, con sonido) -->
+    <div class="principal-container">
+      <video src="videos page/principal.mp4" autoplay loop controls playsinline></video>
     </div>
 
-    <div class="flower flower--4">
-      <div class="flower__leafs flower__leafs--4">
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(0deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(30deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(60deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(90deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(120deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(150deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(180deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(210deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(240deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(270deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(300deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(330deg);"></div>
-        <div class="flower__white-circle"></div>
-
-        <div class="flower__light flower__light--1"></div>
-        <div class="flower__light flower__light--2"></div>
-        <div class="flower__light flower__light--3"></div>
-        <div class="flower__light flower__light--4"></div>
-        <div class="flower__light flower__light--5"></div>
-        <div class="flower__light flower__light--6"></div>
-        <div class="flower__light flower__light--7"></div>
-        <div class="flower__light flower__light--8"></div>
+    <!-- 8 Contenedores Divididos (Diseño zigzag) -->
+    <div class="split-container">
+      <!-- 1 -->
+      <div class="split-row">
+        <div class="video-box">
+          <video src="videos page/1.mp4" autoplay loop muted playsinline></video>
+        </div>
+        <div class="text-box">
+          <h2>estas en mi mente 24/7 , no me imagino que seria sin ti</h2>
+        </div>
       </div>
-      <div class="flower__line">
-        <div class="flower__line__leaf flower__line__leaf--1"></div>
-        <div class="flower__line__leaf flower__line__leaf--2"></div>
-        <div class="flower__line__leaf flower__line__leaf--3"></div>
-        <div class="flower__line__leaf flower__line__leaf--4"></div>
-      </div>
-    </div>
 
-    <div class="flower flower--5">
-      <div class="flower__leafs flower__leafs--5">
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(0deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(30deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(60deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(90deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(120deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(150deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(180deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(210deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(240deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(270deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(300deg);"></div>
-        <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(330deg);"></div>
-        <div class="flower__white-circle"></div>
-
-        <div class="flower__light flower__light--1"></div>
-        <div class="flower__light flower__light--2"></div>
-        <div class="flower__light flower__light--3"></div>
-        <div class="flower__light flower__light--4"></div>
-        <div class="flower__light flower__light--5"></div>
-        <div class="flower__light flower__light--6"></div>
-        <div class="flower__light flower__light--7"></div>
-        <div class="flower__light flower__light--8"></div>
+      <!-- 2 -->
+      <div class="split-row reverse">
+        <div class="video-box">
+          <video src="videos page/2.mp4" autoplay loop muted playsinline></video>
+        </div>
+        <div class="text-box">
+          <h2>no sabes la emocion que florece en mi cuando se que se acerca el dia para vernos
+            de nuevo.
+          </h2>
+        </div>
       </div>
-      <div class="flower__line">
-        <div class="flower__line__leaf flower__line__leaf--1"></div>
-        <div class="flower__line__leaf flower__line__leaf--2"></div>
-        <div class="flower__line__leaf flower__line__leaf--3"></div>
-        <div class="flower__line__leaf flower__line__leaf--4"></div>
-      </div>
-    </div>
 
-    <div class="grow-ans" style="--d:1.2s">
-      <div class="flower__g-long">
-        <div class="flower__g-long__top"></div>
-        <div class="flower__g-long__bottom"></div>
+      <!-- 3 -->
+      <div class="split-row">
+        <div class="video-box">
+          <video src="videos page/3.mp4" autoplay loop muted playsinline></video>
+        </div>
+        <div class="text-box">
+          <h2>no importa hacia donde vaya, siempre quiero volver a ti para estar juntitos</h2>
+        </div>
       </div>
-    </div>
 
-    <div class="growing-grass">
-      <div class="flower__grass flower__grass--1">
-        <div class="flower__grass--top"></div>
-        <div class="flower__grass--bottom"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--1"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--2"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--3"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--4"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--5"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--6"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--7"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--8"></div>
-        <div class="flower__grass__overlay"></div>
+      <!-- 4 -->
+      <div class="split-row reverse">
+        <div class="video-box">
+          <video src="videos page/4.mp4" autoplay loop muted playsinline></video>
+        </div>
+        <div class="text-box">
+          <h2>aunque haya momentos en los que te sientas perdida, y que no sabes a donde ir sabes que estare para ti
+            siempre</h2>
+        </div>
       </div>
-    </div>
 
-    <div class="growing-grass">
-      <div class="flower__grass flower__grass--2">
-        <div class="flower__grass--top"></div>
-        <div class="flower__grass--bottom"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--1"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--2"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--3"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--4"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--5"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--6"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--7"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--8"></div>
-        <div class="flower__grass__overlay"></div>
+      <!-- 5 -->
+      <div class="split-row">
+        <div class="video-box">
+          <video src="videos page/5.mp4" autoplay loop muted playsinline></video>
+        </div>
+        <div class="text-box">
+          <h2>cuando sientas que necesitas escapar de tu rutina ahi estare para huir contigo a ser felices juntos</h2>
+        </div>
       </div>
-    </div>
 
-    <div class="growing-grass">
-      <div class="flower__grass flower__grass--3">
-        <div class="flower__grass--top"></div>
-        <div class="flower__grass--bottom"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--1"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--2"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--3"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--4"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--5"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--6"></div>
-        <div class="flower__grass__overlay"></div>
+      <!-- 6 -->
+      <div class="split-row reverse">
+        <div class="video-box">
+          <video src="videos page/6.mp4" autoplay loop muted playsinline></video>
+        </div>
+        <div class="text-box">
+          <h2>me encanta escribirte cartas de amor siempre que pienso en ti y ten por seguro que todo lo que te digo
+            viene desde lo mas profundo de mi corazon</h2>
+        </div>
       </div>
-    </div>
 
-    <div class="growing-grass">
-      <div class="flower__grass flower__grass--4">
-        <div class="flower__grass--top"></div>
-        <div class="flower__grass--bottom"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--1"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--2"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--3"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--4"></div>
-        <div class="flower__grass__overlay"></div>
+      <!-- 7 -->
+      <div class="split-row">
+        <div class="video-box">
+          <video src="videos page/7.mp4" autoplay loop muted playsinline></video>
+        </div>
+        <div class="text-box">
+          <h2>eres y siempre seras la persona con la que quiero pasar toda mi eternidad a tu lado , y si el cielo existe
+            contigo siento que estoy viviendo en el siempre</h2>
+        </div>
       </div>
-    </div>
 
-    <div class="growing-grass">
-      <div class="flower__grass flower__grass--5">
-        <div class="flower__grass--top"></div>
-        <div class="flower__grass--bottom"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--1"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--2"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--3"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--4"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--5"></div>
-        <div class="flower__grass__overlay"></div>
-      </div>
-    </div>
+      <!-- 8 -->
+      <div class="split-row reverse">
+        <div class="video-box">
+          <video src="videos page/8.mp4" autoplay loop muted playsinline></video>
+        </div>
+        <div class="text-box">
+          <h2>ten por seguro que mi corazon entero te pertenece a ti, amor de mi vida, Grecia.
 
-    <div class="growing-grass">
-      <div class="flower__grass flower__grass--6">
-        <div class="flower__grass--top"></div>
-        <div class="flower__grass--bottom"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--1"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--2"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--3"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--4"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--5"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--6"></div>
-        <div class="flower__grass__overlay"></div>
-      </div>
-    </div>
-
-    <div class="growing-grass">
-      <div class="flower__grass flower__grass--7">
-        <div class="flower__grass--top"></div>
-        <div class="flower__grass--bottom"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--1"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--2"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--3"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--4"></div>
-        <div class="flower__grass__overlay"></div>
-      </div>
-    </div>
-
-    <div class="growing-grass">
-      <div class="flower__grass flower__grass--8">
-        <div class="flower__grass--top"></div>
-        <div class="flower__grass--bottom"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--1"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--2"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--3"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--4"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--5"></div>
-        <div class="flower__grass__overlay"></div>
-      </div>
-    </div>
-
-    <div class="growing-grass">
-      <div class="flower__grass flower__grass--9">
-        <div class="flower__grass--top"></div>
-        <div class="flower__grass--bottom"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--1"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--2"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--3"></div>
-        <div class="flower__grass__overlay"></div>
-      </div>
-    </div>
-
-    <div class="growing-grass">
-      <div class="flower__grass flower__grass--10">
-        <div class="flower__grass--top"></div>
-        <div class="flower__grass--bottom"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--1"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--2"></div>
-        <div class="flower__grass__leaf flower__grass__leaf--3"></div>
-        <div class="flower__grass__overlay"></div>
+          </h2>
+        </div>
       </div>
     </div>
   </div>
