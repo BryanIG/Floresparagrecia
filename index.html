@@ -1064,11 +1064,141 @@
         transform: scale(0.35) rotate(-42deg) rotateY(-115deg);
       }
     }
+
+    /* Additions for Left Text, Right Letter, and Falling Flowers */
+    .left-text {
+      position: fixed;
+      left: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Georgia', serif;
+      font-size: 3rem;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.5);
+      z-index: 100;
+      white-space: pre-wrap;
+      max-width: 300px;
+    }
+
+    .love-letter-container {
+      position: fixed;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      cursor: pointer;
+      perspective: 1000px;
+    }
+
+    .envelope {
+      width: 200px;
+      height: 140px;
+      background: #e0d0c0;
+      position: relative;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+      transition: transform 0.5s;
+    }
+
+    .envelope::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 100px solid transparent;
+      border-right: 100px solid transparent;
+      border-top: 80px solid #d4c0b0;
+      transform-origin: top;
+      transition: transform 0.5s, z-index 0.5s;
+      z-index: 3;
+    }
+
+    .envelope::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 100px solid #ecdac8;
+      border-right: 100px solid #ecdac8;
+      border-bottom: 70px solid #f6eedf;
+      border-top: 70px solid transparent;
+      z-index: 2;
+    }
+
+    .letter {
+      position: absolute;
+      bottom: 0;
+      left: 10px;
+      width: 180px;
+      height: 120px;
+      background: #fff;
+      padding: 10px;
+      box-sizing: border-box;
+      transition: transform 0.5s, height 0.5s;
+      z-index: 1;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.9rem;
+      color: #333;
+      visibility: hidden;
+    }
+
+    .open .envelope::before {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    .open .letter {
+      visibility: visible;
+      transform: translateY(-120px);
+      height: 200px;
+      z-index: 2;
+      box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .falling-flower {
+      position: fixed;
+      top: -10vh;
+      font-size: 2rem;
+      z-index: 50;
+      animation: fall linear forwards;
+      pointer-events: none;
+      filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+    }
   </style>
 </head>
 
 <body class="not-loaded">
   <div class="night"></div>
+
+  <div class="left-text">Para mi chaparrita grecita</div>
+
+  <div class="love-letter-container" onclick="this.classList.toggle('open')">
+    <div class="envelope">
+      <div class="letter">
+        (Mensaje que escribiré después)
+      </div>
+    </div>
+  </div>
 
   <div class="shooting-stars">
     <div class="shooting-star"></div>
@@ -1412,6 +1542,26 @@
             createShootingStar();
           }
         }, Math.random() * 5000 + 3000);
+
+        // Falling flowers logic
+        const flowerEmojis = ['🌻', '🌼', '🌹'];
+        function createFallingFlower() {
+          const flower = document.createElement('div');
+          flower.className = 'falling-flower';
+          const randomFlower = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
+          flower.innerHTML = randomFlower;
+          flower.style.left = Math.random() * 100 + 'vw';
+          flower.style.animationDuration = (Math.random() * 5 + 5) + 's';
+
+          document.body.appendChild(flower);
+
+          setTimeout(() => {
+            flower.remove();
+          }, 10000);
+        }
+
+        setInterval(createFallingFlower, 300);
+
         clearTimeout(c);
       }, 1000);
     };
